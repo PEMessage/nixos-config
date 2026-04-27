@@ -3,6 +3,8 @@
 {
     home.packages = with pkgs; [
         chezmoi
+        neovim
+        gh
     ];
 
     # This must be LF, CRLF will cause error 

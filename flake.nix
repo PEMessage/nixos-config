@@ -21,6 +21,7 @@
       environment.systemPackages = with pkgs; [ 
         git
         vim
+        tmux
       ];
       imports = [
         home-manager.nixosModules.home-manager
