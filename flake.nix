@@ -7,15 +7,32 @@
       url = "github:nix-community/NixOS-WSL/release-25.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { self, nixpkgs, ... }@inputs: 
+  outputs = { self, nixpkgs, home-manager, ... }@inputs: 
   let
     commonModule = { config, pkgs, ... }: {
+      nix.settings.experimental-features = [ "nix-command" "flakes" ];
+      
       environment.systemPackages = with pkgs; [ 
         git
         vim
       ];
+      imports = [
+        home-manager.nixosModules.home-manager
+      ];
+
+      home-manager =  {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        users.pem = import ./users/pem/home-manager.nix {
+          inputs = inputs;
+        };
+      };
     };
   in {
     nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
