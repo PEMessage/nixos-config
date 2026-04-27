@@ -22,6 +22,7 @@
         git
         vim
         tmux
+        python3
       ];
       imports = [
         home-manager.nixosModules.home-manager

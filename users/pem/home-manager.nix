@@ -5,6 +5,7 @@
         chezmoi
         neovim
         gh
+        uv
     ];
 
     # This must be LF, CRLF will cause error 
