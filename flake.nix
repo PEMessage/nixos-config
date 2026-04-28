@@ -82,11 +82,10 @@
     in {
       nixosConfigurations.wsl = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-        specialArgs = { inherit (inputs) nixos-wsl; };
         modules = [
           overrideModule
           commonModule
-          ./machines/wsl.nix
+          (import ./machines/wsl.nix { inherit (inputs) nixos-wsl; })
         ];
       };
     };
