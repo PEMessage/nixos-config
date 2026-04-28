@@ -29,13 +29,17 @@
         nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
         environment.systemPackages = with pkgs; [
+          # basic
+          bc
+          python3
+          wget
+          curl
+
+          # utils
           git
           vim
           tmux
-          python3
           zsh
-          wget
-          curl
           neovim
 
           # build
