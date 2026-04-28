@@ -23,6 +23,7 @@
         vim
         tmux
         python3
+        zsh
       ];
       imports = [
         home-manager.nixosModules.home-manager
