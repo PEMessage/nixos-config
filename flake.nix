@@ -49,18 +49,26 @@
           home-manager.nixosModules.home-manager
         ];
 
+        programs.zsh.enable = true;
+        programs.bash.enable = true;
+
         # Could not start dynamically linked executable: tree-sitter
         # NixOS cannot run dynamically linked executables intended for generic
         # linux environments out of the box. For more information, see:
         # https://nix.dev/permalink/stub-ld
         programs.nix-ld.enable = true;
 
+        # User zone
         home-manager =  {
           useGlobalPkgs = true;
           useUserPackages = true;
           users.pem = import ./users/pem/home-manager.nix {
             inputs = inputs;
           };
+        };
+        users.users.pem = {
+          isNormalUser = true;
+          shell = pkgs.zsh;
         };
       };
     in {
