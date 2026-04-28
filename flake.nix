@@ -22,7 +22,14 @@
         })
       ];
       overrideModule = {
-        nixpkgs.overlays = overlay;
+        nixpkgs.overlays = [
+          (import ./libs/makePackagesOverlay.nix {
+            pkgs = nixpkgs-unstable;
+            packageNames = [
+              "neovim"
+            ];
+          })
+        ];
         nixpkgs.config.allowUnfree = true;
       };
       commonModule = { config, pkgs, ... }: {
