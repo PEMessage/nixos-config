@@ -7,6 +7,7 @@
     gh
     uv
     zsh
+    opencode
   ];
 
   home.file.".profile".text = ''

@@ -16,17 +16,13 @@
 
   outputs = { self, nixpkgs, nixpkgs-unstable, home-manager, ... }@inputs:
     let
-      overlay = [
-        (final: prev: rec {
-          neovim = inputs.nixpkgs-unstable.legacyPackages.${prev.system}.neovim;
-        })
-      ];
       overrideModule = {
         nixpkgs.overlays = [
           (import ./libs/makePackagesOverlay.nix {
             pkgs = nixpkgs-unstable;
             packageNames = [
               "neovim"
+              "opencode"
             ];
           })
         ];
@@ -75,7 +71,7 @@
           useGlobalPkgs = true;
           useUserPackages = true;
           users.pem = import ./users/pem/home-manager.nix {
-            inputs = inputs;
+            inherit inputs;
           };
         };
         users.users.pem = {
